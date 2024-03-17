@@ -96,7 +96,7 @@ import { CartProvider } from "./components/CartContext";
 import ItemListContainer from "./components/ItemListContainer";
 import NavBar from "./components/NavBar";
 import Cart from "./components/Cart";
-import ItemListPage from "./components/ItemListPage";
+{/*import ItemListPage from "./components/ItemListPage";*/}
 import ItemDetailContainer from "./components/ItemDetailContainer";
 
 function App() {
@@ -110,7 +110,7 @@ function App() {
                         <Route path='/category/:id' element={<ItemListContainer />} />
                         <Route path='/item/:id' element={<ItemDetailContainer />} />
                         <Route path="/cart" element={<Cart />} />
-                        <Route path="/ItemListPage" element={<ItemListPage />} />
+                        {/*<Route path="/ItemListPage" element={<ItemListPage />} />*/}
                     </Routes>
                     </>
             </Router>
