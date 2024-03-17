@@ -1,4 +1,3 @@
-// CartProvider.jsx
 import { createContext, useContext, useState } from "react";
 import PropTypes from "prop-types";
 
