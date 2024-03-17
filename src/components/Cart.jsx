@@ -6,7 +6,7 @@ const Cart = () => {
 
     // Calcular el precio total
     const totalPrice = cartItems.reduce((total, item) => {
-        return total + item.cantidad * item.producto.precio;
+        return total + item.cantidad * item.precio;
     }, 0);
 
     return (

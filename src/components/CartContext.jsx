@@ -10,18 +10,22 @@ export const useCart = () => {
 export const CartProvider = ({ children }) => {
     const [cartItems, setCartItems] = useState([]);
 
-    const addToCart = (item) => {
-        console.log(item)
-        // Verificar si el producto ya está en el carrito
+    const addToCart = (item, cantidad) => {
         const isItemInCart = cartItems.find((cartItem) => cartItem.id === item.id);
 
         if (isItemInCart) {
-            // Si el producto ya está en el carrito, no lo agregamos nuevamente
-            return;
+            setCartItems((prevItems) =>
+                prevItems.map((i) => {
+                    if (i.id === item.id) {
+                        return { ...i, cantidad: i.cantidad + cantidad };
+                    }
+                    return i;
+                })
+            );
+        } else {
+            const newItem = { ...item, cantidad };
+            setCartItems((prevItems) => [...prevItems, newItem]);
         }
-
-        // Agregar el producto al carrito
-        setCartItems((prevItems) => [...prevItems, item]);
     };
 
     const getCartQuantity = () => {
