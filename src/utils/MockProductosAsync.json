@@ -1,0 +1,89 @@
+{
+    "categorias": [
+    { "id": 1, "nombre": "Acción" },
+    { "id": 2, "nombre": "Aventura" },
+    { "id": 3, "nombre": "RPG" }
+],
+    "productos": [
+    {
+        "id": 1,
+        "nombre": "ALAN WAKE II",
+        "categoria": 1,
+        "precio": 100,
+        "imagen": "ProductosImg/AlanWake2.webp",
+        "descripcion": "Alan Wake 2 es un juego de terror que continúa la historia del aclamado videojuego de acción y aventura lanzado en 2010. En esta secuela, Alan Wake, un exitoso escritor con base en Nueva York, ha estado atrapado durante 13 años. Su lucha por la cordura y la libertad se desarrolla en el Pacífico Noroeste, una región de majestuosos paisajes y misteriosas sombras."
+    },
+    {
+        "id": 2,
+        "nombre": "A PLAGUE TALE INNOCENCE",
+        "categoria": 2,
+        "precio": 200,
+        "imagen": "ProductosImg/APlagueTaleInnocence.webp",
+        "descripcion": "Es un juego de acción-aventura ambientado en la Francia medieval del siglo XIV, donde controlas a dos hermanos, Amicia y Hugo, que deben escapar de la Inquisición y las ratas portadoras de la peste negra. Con una jugabilidad centrada en el sigilo y la resolución de puzzles, el juego narra una historia conmovedora de supervivencia y confianza."
+    },
+    {
+        "id": 3,
+        "nombre": "ELDEN RING",
+        "categoria": 3,
+        "precio": 300,
+        "imagen": "ProductosImg/ElderRing.webp",
+        "descripcion": "Elden Ring es un juego de rol de acción desarrollado por FromSoftware. Lanzado el 25 de febrero de 2022, el juego se destaca por su mundo abierto y narrativa épica, creada en colaboración con el escritor George R. R. Martin. Los jugadores asumen el papel de un personaje personalizable en una misión para reparar el Elden Ring y convertirse en el nuevo Señor de Elden. El juego presenta combate, exploración y elementos de juego en línea."
+    },
+    {
+        "id": 4,
+        "nombre": "RED DEAD REDEMPTION II",
+        "categoria": 1,
+        "precio": 400,
+        "imagen": "ProductosImg/RedDeadRedemption2Ultimate.webp",
+        "descripcion": "Red Dead Redemption II es un juego de acción-aventura ambientado en el oeste americano a finales del siglo XIX. Desarrollado por Rockstar Games, sigue a Arthur Morgan, un forajido y miembro de la banda Van der Linde. El juego presenta un mundo abierto interactivo con elementos de disparos, robos, caza, montar a caballo y decisiones morales que afectan la reputación del personaje."
+    },
+    {
+        "id": 5,
+        "nombre": "SEKIRO",
+        "categoria": 1,
+        "precio": 500,
+        "imagen": "ProductosImg/Sekiro.webp",
+        "descripcion": "Sekiro: Shadows Die Twice es un juego de acción-aventura desarrollado por FromSoftware. Lanzado en marzo de 2019, el juego sigue a un shinobi conocido como “Lobo” que busca venganza contra un clan samurái que lo aprisionó y secuestró a su señor. Con un enfoque en combate, sigilo y exploración, el juego se ambienta en un Japón ficticio durante el período Sengoku y presenta batallas contra jefes desafiantes."
+    },
+    {
+            "id": 6,
+            "nombre": "A PLAGUE TALE REQUIEM",
+            "categoria": 2,
+            "precio": 600,
+            "imagen": "ProductosImg/APlagueTaleRequiem.webp",
+            "descripcion": "A Plague Tale: Requiem es la secuela del juego A Plague Tale: Innocence, y sigue a los hermanos Amicia y Hugo de Rune en su búsqueda de una cura para la enfermedad de sangre de Hugo. Ambientado en el sur de Francia, deben huir de los soldados de la Inquisición y de hordas de ratas que propagan la peste negra. Lanzado el 18 de octubre de 2022, ha recibido críticas generalmente positivas y fue nominado a Juego del Año en The Game Awards 2022."
+    },
+    {
+            "id": 7,
+            "nombre": "CYBERPUNK 2077 U.E.",
+            "categoria": 3,
+            "precio": 700,
+            "imagen": "ProductosImg/Cyberpunk2077UltimateEdition.webp",
+            "descripcion": "Cyberpunk 2077: Ultimate Edition es una versión mejorada del juego de rol de acción original Cyberpunk 2077, desarrollado por CD Projekt Red. Ambientado en la metrópolis distópica de Night City, el jugador asume el papel de V, un mercenario en busca de un implante único que es la clave para la inmortalidad. La Ultimate Edition incluye el juego base junto con todo el contenido adicional y mejoras realizadas desde su lanzamiento."
+    },
+    {
+            "id": 8,
+            "nombre": "LORDS OF THE FALLEN",
+            "categoria": 1,
+            "precio": 800,
+            "imagen": "ProductosImg/LordsOfTheFallen.webp",
+            "descripcion": "Lords of the Fallen es un videojuego de rol de acción que se juega desde una perspectiva en tercera persona. Como su predecesor, los jugadores pueden usar armas cuerpo a cuerpo y magia para derrotar a los enemigos. El juego adopta elementos de juegos tipo Soulslike en su sistema de juego y combate. La campaña del juego también se puede completar en modo cooperativo con otro jugador. Al comienzo del juego, los jugadores pueden crear y personalizar su propio avatar y elegir entre una de las nueve clases de personajes."
+    },
+    {
+            "id": 9,
+            "nombre": "THE WITCHER III C.E.",
+            "categoria": 3,
+            "precio": 900,
+            "imagen": "ProductosImg/TheWitcher3CompleteEdition.webp",
+            "descripcion": "The Witcher 3: Wild Hunt - Complete Edition es una versión mejorada del juego original que incluye el juego base y las dos expansiones de la historia, Hearts of Stone y Blood and Wine, así como todos los contenidos adicionales lanzados. Esta edición ha sido actualizada con mejoras visuales y técnicas, incluyendo ray tracing en tiempo real y mods creados por la comunidad."
+    },
+    {
+            "id": 10,
+            "nombre": "RESIDENT EVIL 4 R.G.E.",
+            "categoria": 1,
+            "precio": 1000,
+            "imagen": "ProductosImg/ResidentEvil4GoldEdition.webp",
+            "descripcion": "Es un remake del clásico juego de terror Resident Evil 4 originalmente lanzado en 2005. Reimaginado para el año 2023, conserva la esencia del juego original mientras introduce mecánicas de juego actualizadas, una historia reimaginada y gráficos de última generación. La trama sigue a Leon S. Kennedy, un agente especial enviado a rescatar a la hija secuestrada del presidente de EE. UU. en un misterioso pueblo europeo."
+    }
+    ]
+}
