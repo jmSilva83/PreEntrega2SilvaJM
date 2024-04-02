@@ -1,64 +1,103 @@
+// import { useEffect, useState } from "react";
+// import { useCart } from "./CartUtils";
+// import ItemDetail from "./ItemDetail";
+// import CircularProgress from '@mui/material/CircularProgress';
+// import PropTypes from 'prop-types';
+
+
+
+// const ItemDetailContainer = ({productos}) => {
+//     const { addToCart } = useCart();
+//     const [productsCharged, setProductsCharged] = useState({});
+//     const [loading, setLoading] = useState(true);
+
+//     if (loading) return <h1 className="text-center justify-center text-3xl pt-8"><CircularProgress color="secondary" /></h1>;
+
+//     return (
+//         <div className="container mx-auto flex text-green-500 justify-center pt-80">
+//             {productos.map((item, index)=>(
+//                 <ItemDetail key={index} producto={item} onAddToCart={addToCart} />
+//             ))}
+//         </div>
+//     );
+// };
+
+// ItemDetailContainer.propTypes = {
+//     productos: PropTypes.arrayOf(
+//         PropTypes.shape({
+//             id: PropTypes.number.isRequired,
+            
+//         })
+//     ).isRequired,
+// };
+
+// export default ItemDetailContainer;
+
+
+//ItemDetailContainer.jsx
+// ItemDetailContainer.jsx
+// import { useEffect, useState } from "react";
+// import { useCart } from "./CartUtils";
+// import ItemDetail from "./ItemDetail";
+// import CircularProgress from '@mui/material/CircularProgress';
+// import PropTypes from 'prop-types';
+
+// const ItemDetailContainer = ({ productos }) => {
+//     const { addToCart } = useCart();
+//     const [loading, setLoading] = useState(false);
+
+//     if (loading) return <h1 className="text-center justify-center text-3xl pt-8"><CircularProgress color="secondary" /></h1>;
+
+//     return (
+//         <div className="container mx-auto flex text-green-500 justify-center pt-80">
+//             {productos.map((item) => (
+//                 <ItemDetail key={item.id} producto={item} onAddToCart={addToCart} />
+//             ))}
+//         </div>
+//     );
+// };
+
+// ItemDetailContainer.propTypes = {
+//     productos: PropTypes.arrayOf(
+//         PropTypes.shape({
+//             id: PropTypes.string.isRequired,
+//             // Otros campos del producto...
+//         })
+//     ).isRequired,
+// };
+
+//export default ItemDetailContainer;
+
+
 import { useEffect, useState } from "react";
-import { fakeApiCall } from "../utils/fakeApiCall";
 import { useCart } from "./CartUtils";
 import ItemDetail from "./ItemDetail";
-import prod from "../utils/MockProductosAsync.json";
-import CircularProgress from '@mui/material/CircularProgress';
 import PropTypes from 'prop-types';
+import Loader from "./Loaders";
 
-const ItemDetailContainer = ({productos}) => {
+const ItemDetailContainer = ({ productos }) => {
     const { addToCart } = useCart();
-    const [productsCharged, setProductsCharged] = useState({});
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        setLoading(true);
-        fakeApiCall(prod).then((resp) => {
-            setProductsCharged(resp);
+        // Simular una carga de datos durante 2 segundos
+        const timer = setTimeout(() => {
             setLoading(false);
-        });
+        }, 1500);
+
+        // Retornar una función de limpieza vacía
+        return () => {
+            clearTimeout(timer); // Limpiar el temporizador al desmontar el componente
+        };
     }, []);
 
-    if (loading) return <h1 className="text-center justify-center text-3xl pt-8"><CircularProgress color="secondary" /></h1>;
-
-    // Convertir el objeto de productos en un array
-    /* const productosArray = Object.values(productsCharged.productos); */
-    // Dividir el array en dos partes
-    /* const primeraMitad = productosArray.slice(
-        0,
-        Math.ceil(productosArray.length / 2)
-    );
-    const segundaMitad = productosArray.slice(
-        Math.ceil(productosArray.length / 2)
-    ); */
+    if (loading) return <h1 className="text-center justify-center text-3xl pt-8"><Loader /></h1>;
 
     return (
-        <div className="container mx-auto flex text-green-500 justify-center pt-80 ">
-            {productos.map((item, index)=>(
-                <ItemDetail key={index} producto={item} onAddToCart={addToCart} />
+        <div className="container mx-auto flex text-green-500 justify-center pt-80">
+            {productos.map((item) => (
+                <ItemDetail key={item.id} producto={item} onAddToCart={addToCart} />
             ))}
-
-
-            {/* <div className="flex">
-                {primeraMitad.map((producto) => (
-                    <ItemDetail
-                        key={producto.id}
-                        producto={producto}
-                        onAddToCart={addToCart}
-                    />
-                ))}
-            </div>
-
-            
-            <div className="flex">
-                {segundaMitad.map((producto) => (
-                    <ItemDetail
-                        key={producto.id}
-                        producto={producto}
-                        onAddToCart={addToCart}
-                    />
-                ))}
-            </div> */}
         </div>
     );
 };
@@ -66,8 +105,8 @@ const ItemDetailContainer = ({productos}) => {
 ItemDetailContainer.propTypes = {
     productos: PropTypes.arrayOf(
         PropTypes.shape({
-            id: PropTypes.number.isRequired,
-            
+            id: PropTypes.string.isRequired,
+            // Otros campos del producto...
         })
     ).isRequired,
 };

@@ -1,24 +1,31 @@
-import { NavLink } from "react-router-dom";
 import "../index.css";
 import { useState, useEffect, useRef } from "react";
-import CartWidget from "./CartWidget";
+import { NavLink } from "react-router-dom";
 import { FaXbox } from "react-icons/fa";
 import { CiSearch } from "react-icons/ci";
-import cat from "../utils/MockProductosAsync.json";
-import { fakeApiCall } from "../utils/fakeApiCall";
+import CartWidget from "./CartWidget";
+import { collection, getDocs, getFirestore } from "firebase/firestore";
+
 const NavBar = () => {
     const [showCategories, setShowCategories] = useState(false);
     const categoriesRef = useRef(null);
-
+    const [loading, setLoading] = useState(true);
     const [categorias, setCategorias] = useState([]);
 
-
     useEffect(() => {
-        fakeApiCall(cat).then((res) => {
-            setCategorias(res.categorias);
+        const db = getFirestore();
+
+        const getItemByDocs = collection(db, "categorias");
+        getDocs(getItemByDocs).then((snapshot) => {
+            if (snapshot.size === 0) {
+                console.log("no results");
+            }
+            setCategorias(
+                snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
+            );
         });
+        setLoading(false);
     }, []);
-    console.log(categorias);
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -38,17 +45,22 @@ const NavBar = () => {
         };
     }, [showCategories]);
 
+    const handleShowAllProducts = () => {
+        // Aquí puedes agregar la lógica para mostrar todos los productos
+        console.log("Mostrar todos los productos");
+    };
+
     const handleCategoriesToggle = () => {
         setShowCategories(!showCategories);
     };
+    if (loading) return <h1>Cargando...</h1>;
 
     return (
-        <header className="bg-green-500 flex-shrink-0">
+        <header className="fixed top-0 bg-green-500 w-full">
             <div className="container p-2 ml-6 flex items-center justify-between">
                 <div className="mr-56">
                     <NavLink to="/">
-                        <button
-                            className="text-white text-2xl hover:shadow-neumorphism hover:rounded-full">
+                        <button className="text-white text-2xl hover:shadow-neumorphism hover:rounded-full">
                             <FaXbox />
                         </button>
                     </NavLink>
@@ -80,28 +92,37 @@ const NavBar = () => {
                                     ref={categoriesRef}
                                     className="absolute text-center bg-yellow-600 border px-5 text-gray-800 rounded-lg flex flex-col"
                                 >
-                                    {categorias.map(({ id, nombre }) => (<>
-                                    <NavLink to={`/category/${id}`}>
-                                        <button className="hover:underline">
-                                            {nombre}
-                                        </button>
-                                    </NavLink>
-                                    </>))}
+                                    {categorias.map(({ id, nombre }) => (
+                                        <>
+                                            <NavLink
+                                                to={`/category/${id}`}
+                                                key={id}
+                                            >
+                                                <button className="hover:underline">
+                                                    {nombre}
+                                                </button>
+                                            </NavLink>
+                                        </>
+                                    ))}
                                 </ul>
                             )}
                         </li>
                         <li>
-                            <NavLink to="/ItemListPage">
-                                <button className="text-white hover:text-green-700 ButtonNav">
+                            <NavLink to="all-products">
+                                <button
+                                    className="text-white hover:text-green-700 ButtonNav"
+                                    onClick={handleShowAllProducts}
+                                >
                                     Productos
                                 </button>
                             </NavLink>
                         </li>
                         <li>
-                            <button className="text-white hover:text-green-700 ButtonNav">
-                                Contacto
-                            </button>{" "}
-                            {/*agregar el wp aca*/}
+                            <a href="https://wa.me/+543731551351" target="_blank" rel="noopener noreferrer">
+                                <button className="text-white hover:text-green-700 ButtonNav">
+                                    Contacto
+                                </button>
+                            </a>
                         </li>
                         <li>
                             <NavLink to="/cart">

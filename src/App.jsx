@@ -96,21 +96,24 @@ import { CartProvider } from "./components/CartContext";
 import ItemListContainer from "./components/ItemListContainer";
 import NavBar from "./components/NavBar";
 import Cart from "./components/Cart";
-{/*import ItemListPage from "./components/ItemListPage";*/}
 import ItemDetailContainer from "./components/ItemDetailContainer";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 function App() {
     return (
         <CartProvider>
             <Router>
                 <>
-                    <NavBar />                    
+                    <NavBar />   
+                    <ToastContainer />                 
                     <Routes>
-                        <Route path="/" element={<ItemListContainer />} />
+                        <Route path='/' element={<ItemListContainer />} />
                         <Route path='/category/:id' element={<ItemListContainer />} />
                         <Route path='/item/:id' element={<ItemDetailContainer />} />
+                        <Route path='/all-products' element={<ItemListContainer showAllProducts={true} />} />
                         <Route path="/cart" element={<Cart />} />
-                        {/*<Route path="/ItemListPage" element={<ItemListPage />} />*/}
                     </Routes>
                     </>
             </Router>

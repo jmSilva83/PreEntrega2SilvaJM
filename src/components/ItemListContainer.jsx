@@ -1,40 +1,135 @@
+// import PropTypes from "prop-types";
+// import { useEffect, useState } from "react";
+// import { useParams } from "react-router-dom";
+// import ItemDetailContainer from "./ItemDetailContainer";
+// import {
+//     collection,
+//     getDocs,
+//     getFirestore,
+//     query,
+//     where,
+// } from "firebase/firestore";
+// import Loader from "./Loaders";
+
+// const ItemListContainer = ({ showAllProducts }) => {
+//     const { id } = useParams();
+//     const [loading, setLoading] = useState(true);
+//     const [productos, setProductos] = useState([]);
+
+//     useEffect(() => {
+//         const fetchProductos = async () => {
+//             try {
+//                 const db = getFirestore();
+//                 const getProductQuery = showAllProducts
+//                     ? collection(db, "productos")
+//                     : query(
+//                             collection(db, "productos"),
+//                             where("categoria", "==", parseInt(id))
+//                         );
+
+//                 const snapshot = await getDocs(getProductQuery);
+//                 if (snapshot.empty) {
+//                     console.log("No hay productos");
+//                     setProductos([]);
+//                 } else {
+//                     const data = snapshot.docs.map((doc) => ({
+//                         id: doc.id,
+//                         ...doc.data(),
+//                     }));
+//                     setProductos(data);
+//                 }
+//             } catch (error) {
+//                 console.error("Error al obtener los productos:", error);
+//             } finally {
+//                 setLoading(false);
+//             }
+//         };
+
+//         fetchProductos();
+//     }, [id, showAllProducts]);
+
+//     if (loading)
+//         return (
+//             <h1 className="text-center justify-center text-3xl pt-8">
+//                 <Loader />
+//             </h1>
+//         );
+        
+
+//     return <ItemDetailContainer productos={productos} />;
+// };
+
+// ItemListContainer.propTypes = {
+//     showAllProducts: PropTypes.bool.isRequired, // Validación para showAllProducts
+// };
+
+// export default ItemListContainer;
+
+
+import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import categories from "../utils/MockProductosAsync.json";
-import { fakeApiCall } from "../utils/fakeApiCall";
-import CircularProgress from '@mui/material/CircularProgress';
 import ItemDetailContainer from "./ItemDetailContainer";
+import {
+    collection,
+    getDocs,
+    getFirestore,
+    query,
+    where,
+} from "firebase/firestore";
+import Loader from "./Loaders";
 
-const ItemListContainer = () => {
+const ItemListContainer = ({ showAllProducts }) => {
     const { id } = useParams();
-    const [response, setResponse] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [productos, setProductos] = useState([]);
 
     useEffect(() => {
-        fakeApiCall(categories).then((res) => {
-            setResponse(res);
-            setLoading(false);
-        });
-    }, []);
+        const fetchProductos = async () => {
+            try {
+                const db = getFirestore();
+                const getProductQuery = showAllProducts
+                    ? collection(db, "productos")
+                    : query(
+                            collection(db, "productos"),
+                            where("categoria", "==", parseInt(id))
+                        );
 
-    if (loading) return <h1 className="text-center justify-center text-3xl pt-8"><CircularProgress color="secondary" /></h1>;
+                const snapshot = await getDocs(getProductQuery);
+                if (snapshot.empty) {
+                    console.log("No hay productos");
+                    setProductos([]);
+                } else {
+                    const data = snapshot.docs.map((doc) => ({
+                        id: doc.id,
+                        stock: doc.data().stock, // Asegúrate de que el campo stock esté en tus documentos
+                        ...doc.data(),
+                    }));
+                    setProductos(data);
+                }
+            } catch (error) {
+                console.error("Error al obtener los productos:", error);
+            } finally {
+                setLoading(false);
+            }
+        };
 
-    const getProductosByCategory = (catId) => {
-        if (catId) {
-            return response.productos.filter(
-                (product) => product.categoria === parseInt(catId)
-            );
-        }
-    };
+        fetchProductos();
+    }, [id, showAllProducts]);
 
-    const productsPorCategoria = getProductosByCategory(id);
+    if (loading)
+        return (
+            <h1 className="text-center justify-center text-3xl pt-8">
+                <Loader />
+            </h1>
+        );
+        
 
-    return (
-        <>
-            {productsPorCategoria &&
-                <ItemDetailContainer productos ={productsPorCategoria}/>}
-        </>
-    );
+    return <ItemDetailContainer productos={productos} />;
+};
+
+ItemListContainer.propTypes = {
+    showAllProducts: PropTypes.bool.isRequired, // Validación para showAllProducts
 };
 
 export default ItemListContainer;

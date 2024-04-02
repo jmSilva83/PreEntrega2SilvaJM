@@ -7,7 +7,7 @@ export const useCart = () => {
     return useContext(CartContext);
 };
 
-export const CartProvider = ({ children }) => {
+export const CartContextProvider = ({ children }) => {
     const [cartItems, setCartItems] = useState([]);
 
     const addToCart = (item) => {
@@ -25,15 +25,17 @@ export const CartProvider = ({ children }) => {
     );
 };
 
-CartProvider.propTypes = {
+CartContextProvider.propTypes = {
     children: PropTypes.node.isRequired,
     addToCart: PropTypes.func.isRequired,
     getCartQuantity: PropTypes.func.isRequired,
 };
 
-CartProvider.propTypes = {
+CartContextProvider.propTypes = {
     children: PropTypes.node.isRequired,
     addToCart: PropTypes.func.isRequired,
     getCartQuantity: PropTypes.func.isRequired,
     cartItems: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
+
+export default CartContextProvider;

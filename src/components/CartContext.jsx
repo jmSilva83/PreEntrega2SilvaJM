@@ -11,21 +11,21 @@ export const CartProvider = ({ children }) => {
     const [cartItems, setCartItems] = useState([]);
 
     const addToCart = (item, cantidad) => {
-        const isItemInCart = cartItems.find((cartItem) => cartItem.id === item.id);
-
-        if (isItemInCart) {
-            setCartItems((prevItems) =>
-                prevItems.map((i) => {
-                    if (i.id === item.id) {
-                        return { ...i, cantidad: i.cantidad + cantidad };
-                    }
-                    return i;
-                })
-            );
+        const existingItemIndex = cartItems.findIndex((cartItem) => cartItem.id === item.id);
+    
+        if (existingItemIndex !== -1) {
+            // Si el producto ya está en el carrito, actualizamos su cantidad
+            const updatedCartItems = [...cartItems];
+            updatedCartItems[existingItemIndex].cantidad += cantidad;
+            setCartItems(updatedCartItems);
         } else {
-            const newItem = { ...item, cantidad };
-            setCartItems((prevItems) => [...prevItems, newItem]);
+            // Si el producto no está en el carrito, lo agregamos como un nuevo elemento con la cantidad especificada
+            setCartItems((prevItems) => [...prevItems, { ...item, cantidad }]);
         }
+    };
+    
+    const clearCart = () => {
+        setCartItems([]);
     };
 
     const getCartQuantity = () => {
@@ -35,6 +35,7 @@ export const CartProvider = ({ children }) => {
     const contextValue = {
         cartItems,
         addToCart,
+        clearCart,
         getCartQuantity,
     };
 
